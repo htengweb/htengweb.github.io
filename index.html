@@ -1,19 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>github test</title>
+<meta charset="UTF-8">
+<title>htengweb</title>
+<link rel="stylesheet" href="./css/main.css" />
 <style type="text/css">
-	.box{
-		width: 100%;
-		line-height: 50px;
-		text-align: center;
-		color: red;
-	}
+.count-particles{
+	position: absolute;
+}
 </style>
 </head>
 <body>
-<div class="box">
-	测试
+<!-- count particles -->
+<div class="count-particles">
+	<span class="js-count-particles"></span>
 </div>
+
+<!-- particles.js container -->
+<div id="particles-js"></div>
+<script type="text/javascript" src="./js/particles.js"></script>
+<script type="text/javascript" src="./js/app.js"></script>
+<script type="text/javascript" src="./js/stats.js"></script>
+<script>
+	var count_particles, stats, update;
+	stats = new Stats;
+	stats.setMode(0);
+	stats.domElement.style.position = 'absolute';
+	stats.domElement.style.left = '0px';
+	stats.domElement.style.top = '0px';
+	document.body.appendChild(stats.domElement);
+	count_particles = document.querySelector('.js-count-particles');
+	update = function() {
+		stats.begin();
+		stats.end();
+		if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+			count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+		}
+		requestAnimationFrame(update);
+	};
+	requestAnimationFrame(update);
+</script>
 </body>
 </html>
